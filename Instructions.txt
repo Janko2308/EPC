@@ -1,0 +1,7 @@
+build
+
+cmake ..
+
+cmake --build .
+
+ctest -C Release --output-on-failure
