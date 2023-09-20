@@ -1,5 +1,5 @@
 set(sources
-    src/EPC.cpp
+    src/string.cpp
 )
 
 set(exe_sources
@@ -8,9 +8,9 @@ set(exe_sources
 )
 
 set(headers
-    include/EPC/epc.hpp
+    include/technikumSTL/string.h
 )
 
 set(test_sources
-  src/epc_test.cpp
+  src/epc_string_test.cpp
 )
