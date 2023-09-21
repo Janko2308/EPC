@@ -4,7 +4,9 @@
 TEST(StringTests, AppendString) {
     technikum::string str1("Hello, ");
     // technikum::String str2("World!");
-    str1.append("World!");
-    EXPECT_EQ(str1.length(str1), 13);
-    EXPECT_STREQ(str1.c_str(), "Hello, World!");
+    //str1.append("World!");
+    //int test = str1.length(str1);
+    //const char* test2 = str1.c_str();
+    EXPECT_EQ(test, 13);
+    EXPECT_STREQ(test2, "Hello, World!");
 }

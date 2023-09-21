@@ -3,7 +3,7 @@
 
 TEST(StringTests, InitializeFromString) {
     const char* cstr = "Hello, World!";
-    technikum::string myString = technikum::string(cstr);
+    technikum::string myString(cstr);
     EXPECT_EQ(myString.length(cstr), 13);
     EXPECT_STREQ(myString.c_str(), cstr);
 }

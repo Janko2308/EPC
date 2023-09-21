@@ -1,15 +1,19 @@
 #include "technikumSTL/string.h"
 
+#include <iostream>
 namespace technikum
 {
 
   string::string(char const* cstr)
   {
-    //m_data = new char[length(cstr + 1)];
-    m_data = cstr;
+    int m_length = length(cstr);  
+    m_data = new char[m_length + 1];  
+    for (int i = 0; i < m_length; i++)
+    {
+      m_data[i] = cstr[i];
+    }
+    m_data[m_length] = '\0';  
   }
-
-  // write the append function here
 
   int string::length(char const* cstr) const
   {
@@ -31,27 +35,27 @@ namespace technikum
     return length;
   }
 
-  string string::append(char const* cstr)
+  void string::append(char const* cstr)
   {
-    int m_length = this->length(this->m_data);
-    int c_length = this->length(cstr);
+    int m_length = length(m_data);
+    int c_length = length(cstr);
 
     int newLength = m_length + c_length;
     char* newString = new char[newLength + 1];
-    int i = 0;
-    for (i = 0; i < m_length; i++)
+
+    for (int i = 0; i < m_length; i++)
     {
       newString[i] = this->m_data[i];
     }
-    // schau ob es richtig speichert
+
     for (int j = 0; j < c_length; j++)
     {
-      newString[i + j] = cstr[j];
+      newString[m_length + j] = cstr[j];
     }
+    newString[newLength] = '\0';
 
+    delete[] this->m_data;
     this->m_data = newString;
-
-    return newString;
   }
 
   const char* string::c_str()
@@ -61,7 +65,12 @@ namespace technikum
 
   string::~string()
   {
-    delete this->m_data;
+    if (this->m_data != nullptr)
+    {
+            //doesnt worrk with the code below (Reason? Unknown)
+      //delete[] this->m_data;
+            //To whomever is reading this, please help me understand why the code above doesnt work
+    }
   }
 
-}  // namespace technikum
+} 
