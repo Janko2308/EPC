@@ -7,10 +7,11 @@ namespace technikum {
         string(const char* cstr);
         ~string();
         int length(char const* cstr) const;
-        int length(string str) const;
+        //int length(string str) const;
         const char* c_str();
         void append(const char* cstr);
-
+        
+        
     private:
         char* m_data;
     };
