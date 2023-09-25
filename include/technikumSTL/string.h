@@ -6,6 +6,13 @@ namespace technikum {
     public:
         string(const char* cstr);
         ~string();
+        //Copy Constructor
+        //Copy Assignment Operator
+        //Move Constructor
+        string(string&& other) noexcept;
+        //Move Assignment Operator
+        string& operator=(string&& other) noexcept;
+
         int length(char const* cstr) const;
         //int length(string str) const;
         const char* c_str();

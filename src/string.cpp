@@ -14,6 +14,24 @@ namespace technikum
     }
     this->m_data[m_length] = '\0';  
   }
+ 
+  string::string(string&& other) noexcept{
+    m_data = other.m_data;
+    other.m_data = nullptr;
+  }
+  
+  string& string::operator=(string&& other) noexcept {
+        if (this != &other) {  // Check for self-assignment
+            // Release the current resources, if any
+            delete[] m_data;
+
+            // Move the ownership of m_data from 'other' to 'this'
+            m_data = other.m_data;
+            other.m_data = nullptr;
+        }
+        return *this;
+    }
+
 
   int string::length(char const* cstr) const
   {

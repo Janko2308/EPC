@@ -57,6 +57,21 @@ TEST(StringTests, AppendEmptyCharToEmptyChar) {
     EXPECT_STREQ(str1.c_str(), "");
 }
 
+/*TEST(StringTests, MoveConstructor) {
+    technikum::string str1("hello");
+    technikum::string str2 = std::move(str1);
+    //EXPECT_EQ(str1.length(str1.c_str()), 0);
+    EXPECT_STREQ(str2.c_str(), "hello");
+}*/
+
+/*TEST(StringTests, MoveAssignmentOperator) {
+    technikum::string str1("hello");
+    technikum::string str2 = ("World");
+    str2 = std::move(str1);
+    //EXPECT_EQ(str1.length(str1.c_str()), 0);
+    EXPECT_STREQ(str2.c_str(), "hello");
+}*/
+
 /*TEST(StringTests, LetsSee) {
     technikum::string str1("Hello");
     technikum::string str2(str1);
