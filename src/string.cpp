@@ -1,14 +1,15 @@
 #include "technikumSTL/string.h"
 
 #include <iostream>
+
 namespace technikum
 {
 
   string::string(char const* cstr)
   {
-    int m_length = length(cstr);  
+    size_t m_length = length(cstr);  
     this->m_data = new char[m_length + 1];  
-    for (int i = 0; i < m_length; i++)
+    for (size_t i = 0; i < m_length; i++)
     {
       this->m_data[i] = cstr[i];
     }
@@ -33,9 +34,35 @@ namespace technikum
     }
 
 
-  int string::length(char const* cstr) const
+  //Copy Constructor
+  string::string(const string& str) : m_data(str.m_data) {
+    if (str.m_data) {
+      m_data = new char[str.length(str.m_data) + 1];
+      size_t length = str.length(str.m_data);
+      for (size_t i = 0; i <= length; ++i) {
+          m_data[i] = str.m_data[i];
+      }
+    }
+  }
+  //Copy Assignment Operator
+  string& string::operator=(const string& str) {
+      if (this != &str) {
+        delete[] m_data;
+        m_data = new char[str.length(str.m_data) + 1];
+        size_t length = str.length(str.m_data);
+        for (size_t i = 0; i <= length; ++i){
+          m_data[i] = str.m_data[i];
+        } 
+      }
+      return *this;
+  }
+  //Move Constructor
+
+  //Move Assignment Operator
+
+  size_t string::length(char const* cstr) const
   {
-    int length = 0;
+    size_t length = 0;
     while (cstr[length] != '\0')//kann endlos laufen falls fehler
     {
       length++;
@@ -55,18 +82,18 @@ namespace technikum
 
   void string::append(char const* cstr)
   {
-    int m_length = length(m_data);
-    int c_length = length(cstr);
+    size_t m_length = length(m_data);
+    size_t c_length = length(cstr);
 
-    int newLength = m_length + c_length;
+    size_t newLength = m_length + c_length;
     char* newString = new char[newLength + 1];
 
-    for (int i = 0; i < m_length; i++)
+    for (size_t i = 0; i < m_length; i++)
     {
       newString[i] = this->m_data[i];
     }
 
-    for (int j = 0; j < c_length; j++)
+    for (size_t j = 0; j < c_length; j++)
     {
       newString[m_length + j] = cstr[j];
     }
