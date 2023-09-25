@@ -75,6 +75,20 @@ namespace technikum{
         EXPECT_EQ(str1.length(str1.c_str()), str2.length(str2.c_str()));
         EXPECT_STREQ(str1.c_str(), str2.c_str());
     }
+    TEST(StringTests, MoveConstructor) {
+        technikum::string str1("hello");
+        technikum::string str2 = std::move(str1);
+        //EXPECT_EQ(str1.length(str1.c_str()), 0);
+        EXPECT_STREQ(str2.c_str(), "hello");
+    }
+
+    TEST(StringTests, MoveAssignmentOperator) {
+        technikum::string str1("hello");
+        technikum::string str2 = ("World");
+        str2 = std::move(str1);
+        //EXPECT_EQ(str1.length(str1.c_str()), 0);
+        EXPECT_STREQ(str2.c_str(), "hello");
+    }
 }
 
 /*TEST(StringTests, LetsSee) {
@@ -92,4 +106,5 @@ namespace technikum{
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }
+
 */

@@ -13,10 +13,10 @@ namespace technikum {
         //Copy Assignment Operator
         string& operator=(const string& str);
         //Move Constructor
+        string(string&& other) noexcept;
         //Move Assignment Operator
-
+        string& operator=(string&& other) noexcept;
         size_t length(char const* cstr) const;
-        //int length(string str) const;
         const char* c_str();
         void append(const char* cstr);
         
