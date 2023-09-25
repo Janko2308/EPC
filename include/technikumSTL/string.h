@@ -2,19 +2,18 @@
 #define string_h
 
 namespace technikum {
-    class String {
+    class string {
     public:
-        //String();
-        String(const char* cstr);
-        //~String();
+        string(const char* cstr);
+        ~string();
         int length(char const* cstr) const;
-        int length(String str) const;
+        //int length(string str) const;
         const char* c_str();
-        String append(const char* cstr);
-
+        void append(const char* cstr);
+        
+        
     private:
-        char const* m_data;
-        //int m_length;
+        char* m_data;
     };
 
 }

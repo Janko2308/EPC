@@ -1,51 +1,73 @@
 #include "technikumSTL/string.h"
 
-technikum::String::String(char const* cstr) {
-    m_data = cstr;
-}
+#include <iostream>
+namespace technikum
+{
 
-//write the append function here
+  string::string(char const* cstr)
+  {
+    int m_length = length(cstr);  
+    this->m_data = new char[m_length + 1];  
+    for (int i = 0; i < m_length; i++)
+    {
+      this->m_data[i] = cstr[i];
+    }
+    this->m_data[m_length] = '\0';  
+  }
 
-int technikum::String::length(char const* cstr) const {
+  int string::length(char const* cstr) const
+  {
     int length = 0;
-    while (cstr[length] != '\0') {
-        length++;
+    while (cstr[length] != '\0')//kann endlos laufen falls fehler
+    {
+      length++;
     }
     return length;
-}
+  }
 
-int technikum::String::length(String str) const {
+  /*int string::length(string str) const
+  {
     int length = 0;
-    while (str.m_data[length] != '\0') {
-        length++;
+    while (str.m_data[length] != '\0')
+    {
+      length++;
     }
     return length;
-}
+  }*/
 
-technikum::String technikum::String::append(char const* cstr) {
-    int m_length = this->length(this->m_data);
-    int c_length = this->length(cstr);
+  void string::append(char const* cstr)
+  {
+    int m_length = length(m_data);
+    int c_length = length(cstr);
 
     int newLength = m_length + c_length;
     char* newString = new char[newLength + 1];
-    int i = 0;
-    for (i = 0; i < m_length; i++) {
-        newString[i] = this->m_data[i];
-    }
-    //schau ob es richtig speichert
-    for (int j = 0; j < c_length; j++) {
-        newString[i + j] = cstr[j];
+
+    for (int i = 0; i < m_length; i++)
+    {
+      newString[i] = this->m_data[i];
     }
 
+    for (int j = 0; j < c_length; j++)
+    {
+      newString[m_length + j] = cstr[j];
+    }
+    newString[newLength] = '\0';
+
+    delete[] this->m_data;
     this->m_data = newString;
+  }
 
-    return newString;
-}
+  const char* string::c_str()
+  {
+    return this->m_data;
+  }
 
-const char* technikum::String::c_str() {
-    return m_data;
-}
+  string::~string()
+  { 
+    
+      delete[] this->m_data;      
+    
+  }
 
-// technikum::String::~String() {
-//     delete[] m_data;
-// }
+} //uint_8 size_t const (string::)? static? /copy constructor

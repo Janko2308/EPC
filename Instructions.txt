@@ -5,3 +5,7 @@ cmake ..
 cmake --build .
 
 ctest -C Release --output-on-failure
+
+sudo apt-get install valgrind
+
+valgrind --tool=memcheck --leak-check=yes ctest -C Release --output-on-failure

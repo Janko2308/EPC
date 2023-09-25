@@ -12,5 +12,6 @@ set(headers
 )
 
 set(test_sources
-  src/epc_string_test.cpp
+  src/string_test.cpp
+
 )
