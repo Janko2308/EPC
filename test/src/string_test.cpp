@@ -51,6 +51,7 @@ namespace technikum{
         EXPECT_STREQ(str1.c_str(), "Empty");
     }
 
+
     TEST(StringTests, AppendEmptyCharToEmptyChar) {
         technikum::string str1("");
         const char* cstr = "";
@@ -75,31 +76,22 @@ namespace technikum{
         EXPECT_EQ(str1.length(str1.c_str()), str2.length(str2.c_str()));
         EXPECT_STREQ(str1.c_str(), str2.c_str());
     }
-    TEST(StringTests, MoveConstructor) {
+    TEST(StringMoveConstructorTest, MoveConstructor) {
         technikum::string str1("hello");
         technikum::string str2 = std::move(str1);
         //EXPECT_EQ(str1.length(str1.c_str()), 0);
         EXPECT_STREQ(str2.c_str(), "hello");
     }
 
-    TEST(StringTests, MoveAssignmentOperator) {
+    TEST(StringMoveAssignmentOperatorTest, MoveAssignmentOperator) {
         technikum::string str1("hello");
         technikum::string str2 = ("World");
         str2 = std::move(str1);
         //EXPECT_EQ(str1.length(str1.c_str()), 0);
         EXPECT_STREQ(str2.c_str(), "hello");
     }
-}
 
-/*TEST(StringTests, LetsSee) {
-    technikum::string str1("Hello");
-    technikum::string str2(str1);
-    std::cout << "working" << std::endl;
-    EXPECT_EQ(str2.length(str2.c_str()), 5);
-    std::cout << "working" << std::endl;
-    EXPECT_STREQ(str2.c_str(), "Hello");
-    std::cout << "working" << std::endl;
-}*/
+}
 
 /* int main(int argc, char **argv)
 {

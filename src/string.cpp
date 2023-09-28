@@ -5,6 +5,7 @@
 namespace technikum
 {
 
+
   string::string(char const* cstr)
   {
     size_t m_length = length(cstr);  
@@ -16,17 +17,20 @@ namespace technikum
     this->m_data[m_length] = '\0';  
   }
  
-  string::string(string&& other) noexcept{
-    m_data = other.m_data;
-    other.m_data = nullptr;
+
+  //Move Constructor
+  string::string(string&& other)noexcept : m_data(other.m_data){
+    if(other.m_data){
+      m_data = other.m_data;
+      other.m_data = nullptr;
+    }
   }
   
-  string& string::operator=(string&& other) noexcept {
-        if (this != &other) {  // Check for self-assignment
-            // Release the current resources, if any
-            delete[] m_data;
 
-            // Move the ownership of m_data from 'other' to 'this'
+  //Move Assignment Operator
+  string& string::operator=(string&& other) noexcept {
+        if (this != &other) {  
+            delete[] m_data;
             m_data = other.m_data;
             other.m_data = nullptr;
         }
@@ -56,9 +60,9 @@ namespace technikum
       }
       return *this;
   }
-  //Move Constructor
+  
 
-  //Move Assignment Operator
+  
 
   size_t string::length(char const* cstr) const
   {
@@ -82,6 +86,7 @@ namespace technikum
 
   void string::append(char const* cstr)
   {
+  
     size_t m_length = length(m_data);
     size_t c_length = length(cstr);
 
@@ -101,6 +106,7 @@ namespace technikum
 
     delete[] this->m_data;
     this->m_data = newString;
+    
   }
 
   const char* string::c_str()
@@ -110,8 +116,10 @@ namespace technikum
 
   string::~string()
   { 
-    
-      delete[] this->m_data;      
+    if(m_data !=  nullptr){
+      delete[] this->m_data; 
+    }
+           
     
   }
 
