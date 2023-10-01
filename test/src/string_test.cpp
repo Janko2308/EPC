@@ -91,6 +91,19 @@ namespace technikum{
         EXPECT_STREQ(str2.c_str(), "hello");
     }
 
+
+    TEST(Stringconvert, convertionOfString) {
+        technikum::string str1("hello");
+        const char* converted = str1.convert();
+        EXPECT_EQ(converted[0], 'h');
+        EXPECT_EQ(converted[1], 'e');
+        EXPECT_EQ(converted[2], 'l');
+        EXPECT_EQ(converted[3], 'l');
+        EXPECT_EQ(converted[4], 'o');
+        EXPECT_EQ(converted[5], '\0');
+        
+    }
+
     TEST(StringOverloadedPlusOperatorTest, OverloadedPlusOperator) {
         technikum::string str1("Hello, ");
         technikum::string str2("World!");
@@ -122,7 +135,6 @@ namespace technikum{
         EXPECT_EQ(str1.length(str1.c_str()), 13);
         EXPECT_STREQ(str1.c_str(), "Hello, World!");
     }
-
 
 }
 

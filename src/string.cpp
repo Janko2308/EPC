@@ -4,8 +4,6 @@
 
 namespace technikum
 {
-
-
   string::string(char const* cstr)
   {
     size_t m_length = length(cstr);  
@@ -60,9 +58,6 @@ namespace technikum
       }
       return *this;
   }
-  
-
-  
 
   size_t string::length(char const* cstr) const
   {
@@ -110,6 +105,17 @@ namespace technikum
     
   }
 
+
+  const char* string::convert(){
+    size_t m_length = length(this->m_data);
+    char* converted = new char[m_length];
+    for (size_t i = 0; i <= m_length; i++)
+    {
+      converted[i] = this->m_data[i];
+    } 
+    return converted;
+  }
+
   // string operator+(const string& str1, const string str2)
   // {
   //   string str1cpy(str1);
@@ -142,14 +148,13 @@ namespace technikum
   string& string::operator+=(const string& str2) {
     append(str2.m_data); 
     return *this; 
-}
+  }
 
   string& string::operator+=(const char* cstr) {
     append(cstr);
     return *this;
   }
   
-
   const char* string::c_str()
   {
     return this->m_data;
