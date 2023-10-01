@@ -109,6 +109,18 @@ namespace technikum
     
   }
 
+  const char* string::convert(){
+    size_t m_length = length(this->m_data);
+    char* converted = new char[m_length];
+    for (size_t i = 0; i <= m_length; i++)
+    {
+      converted[i] = this->m_data[i];
+    } 
+    return converted;
+  }
+
+
+
   const char* string::c_str()
   {
     return this->m_data;

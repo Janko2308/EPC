@@ -17,6 +17,7 @@ namespace technikum {
         //Move Assignment Operator
         string& operator=(string&& other) noexcept;
         size_t length(char const* cstr) const;
+        const char* convert();
         const char* c_str();
         void append(const char* cstr);
         
