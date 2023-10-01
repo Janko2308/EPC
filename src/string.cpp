@@ -4,8 +4,6 @@
 
 namespace technikum
 {
-
-
   string::string(char const* cstr)
   {
     size_t m_length = length(cstr);  
@@ -60,9 +58,6 @@ namespace technikum
       }
       return *this;
   }
-  
-
-  
 
   size_t string::length(char const* cstr) const
   {
@@ -73,6 +68,7 @@ namespace technikum
     }
     return length;
   }
+
 
   /*int string::length(string str) const
   {
@@ -109,6 +105,7 @@ namespace technikum
     
   }
 
+
   const char* string::convert(){
     size_t m_length = length(this->m_data);
     char* converted = new char[m_length];
@@ -119,8 +116,45 @@ namespace technikum
     return converted;
   }
 
+  // string operator+(const string& str1, const string str2)
+  // {
+  //   string str1cpy(str1);
+  //   string str2cpy(str2);
+  //   str1cpy.append(str2cpy.c_str());
+  //   return str1cpy;
+  // };
 
+  // string operator+(const string& str1, const char* str2)
+  // {
+  //   string str1cpy(str1);
+  //   string str2cpy(str2);
 
+  //   str1cpy.append(str2cpy.c_str());
+  //   return str1cpy;
+  // }
+
+  string operator+(string& str1, const char* str2)
+  {
+    str1.append(str2);
+    return str1;
+  }
+
+  string operator+(string& str1, string& str2)
+  {
+    str1.append(str2.c_str());
+    return str1;
+  }
+
+  string& string::operator+=(const string& str2) {
+    append(str2.m_data); 
+    return *this; 
+  }
+
+  string& string::operator+=(const char* cstr) {
+    append(cstr);
+    return *this;
+  }
+  
   const char* string::c_str()
   {
     return this->m_data;

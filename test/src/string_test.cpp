@@ -91,6 +91,7 @@ namespace technikum{
         EXPECT_STREQ(str2.c_str(), "hello");
     }
 
+
     TEST(Stringconvert, convertionOfString) {
         technikum::string str1("hello");
         const char* converted = str1.convert();
@@ -103,7 +104,37 @@ namespace technikum{
         
     }
 
-    
+    TEST(StringOverloadedPlusOperatorTest, OverloadedPlusOperator) {
+        technikum::string str1("Hello, ");
+        technikum::string str2("World!");
+        technikum::string str3 = str1 + str2;
+        EXPECT_EQ(str3.length(str3.c_str()), 13);
+        EXPECT_STREQ(str3.c_str(), "Hello, World!");
+    }
+
+    TEST(StringOverloadedPlusOperatorTest, OverloadedPlusOperatorWithConstChar) {
+        technikum::string str1("Hello, ");
+        const char* cstr = "World!";
+        technikum::string str3 = str1 + cstr;
+        EXPECT_EQ(str3.length(str3.c_str()), 13);
+        EXPECT_STREQ(str3.c_str(), "Hello, World!");
+    }
+
+    TEST(StringOverloadedPlusEqualsOperatorTest, OverloadedPlusEqualsOperator) {
+        technikum::string str1("Hello, ");
+        technikum::string str2("World!");
+        str1 += str2;
+        EXPECT_EQ(str1.length(str1.c_str()), 13);
+        EXPECT_STREQ(str1.c_str(), "Hello, World!");
+    }
+
+    TEST(StringOverloadedPlusEqualsOperatorTest, OverloadedPlusEqualsOperatorWithConstChar) {
+        technikum::string str1("Hello, ");
+        const char* cstr = "World!";
+        str1 += cstr;
+        EXPECT_EQ(str1.length(str1.c_str()), 13);
+        EXPECT_STREQ(str1.c_str(), "Hello, World!");
+    }
 
 }
 
