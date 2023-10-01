@@ -74,6 +74,7 @@ namespace technikum
     return length;
   }
 
+
   /*int string::length(string str) const
   {
     int length = 0;
@@ -108,6 +109,46 @@ namespace technikum
     this->m_data = newString;
     
   }
+
+  // string operator+(const string& str1, const string str2)
+  // {
+  //   string str1cpy(str1);
+  //   string str2cpy(str2);
+  //   str1cpy.append(str2cpy.c_str());
+  //   return str1cpy;
+  // };
+
+  // string operator+(const string& str1, const char* str2)
+  // {
+  //   string str1cpy(str1);
+  //   string str2cpy(str2);
+
+  //   str1cpy.append(str2cpy.c_str());
+  //   return str1cpy;
+  // }
+
+  string operator+(string& str1, const char* str2)
+  {
+    str1.append(str2);
+    return str1;
+  }
+
+  string operator+(string& str1, string& str2)
+  {
+    str1.append(str2.c_str());
+    return str1;
+  }
+
+  string& string::operator+=(const string& str2) {
+    append(str2.m_data); 
+    return *this; 
+}
+
+  string& string::operator+=(const char* cstr) {
+    append(cstr);
+    return *this;
+  }
+  
 
   const char* string::c_str()
   {
