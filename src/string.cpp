@@ -149,7 +149,7 @@ namespace technikum
   //   return str1cpy;
   // }
 
-  string operator+(string& str1, const char* str2)
+  /*string operator+(string& str1, const char* str2)
   {
     if(str2!=nullptr){
       str1.append(str2);
@@ -161,7 +161,20 @@ namespace technikum
   {
     str1.append(str2.c_str());
     return str1;
-  }
+  }*/
+
+  string string::operator+(const string& str2) const {
+        string result = *this; // Create a copy of the current string
+        result += str2;       // Use the += operator to concatenate str2
+        return result;        // Return the result
+    }
+
+    // Operator+ overload for string + const char*
+    string string::operator+(const char* cstr) const {
+        string result = *this; // Create a copy of the current string
+        result += cstr;        // Use the += operator to concatenate cstr
+        return result;        // Return the result
+    }
 
   string& string::operator+=(const string& str2) {
     append(str2.m_data); 

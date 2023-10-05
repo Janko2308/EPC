@@ -122,6 +122,8 @@ namespace technikum{
         technikum::string str3 = str1 + str2;
         EXPECT_EQ(str3.length(str3.c_str()), 13);
         EXPECT_STREQ(str3.c_str(), "Hello, World!");
+        EXPECT_STREQ(str1.c_str(), "Hello, ");
+        EXPECT_STREQ(str2.c_str(), "World!");
     }
 
     TEST(StringOverloadedPlusOperatorTest, OverloadedPlusOperatorWithConstChar) {
@@ -130,6 +132,8 @@ namespace technikum{
         technikum::string str3 = str1 + cstr;
         EXPECT_EQ(str3.length(str3.c_str()), 13);
         EXPECT_STREQ(str3.c_str(), "Hello, World!");
+        EXPECT_STREQ(str1.c_str(), "Hello, ");
+        EXPECT_STREQ(cstr, "World!");
     }
 
     TEST(StringOverloadedPlusEqualsOperatorTest, OverloadedPlusEqualsOperator) {
@@ -161,6 +165,23 @@ namespace technikum{
         str1.append(tozero);
         EXPECT_EQ(str1.length(str1.c_str()), 5);
         EXPECT_STREQ(str1.c_str(), "hello");
+    }
+
+    TEST(StringNullptrTest, NullptrOperatorPlus) {
+        const char* tozero = nullptr;
+        technikum::string str1("Hello");
+        technikum::string str3 = str1 + tozero;
+        EXPECT_EQ(str3.length(str3.c_str()), 5);
+        EXPECT_STREQ(str3.c_str(), "Hello");
+        EXPECT_STREQ(str1.c_str(), "Hello");
+    }
+
+    TEST(StringNullptrTest, NullptrOperatorPlusEqual) {
+        const char* tozero = nullptr;
+        technikum::string str1("Hello");
+        str1 += tozero;
+        EXPECT_EQ(str1.length(str1.c_str()), 5);
+        EXPECT_STREQ(str1.c_str(), "Hello");
     }
 
 }

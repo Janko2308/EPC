@@ -24,8 +24,11 @@ namespace technikum {
 
         // friend string operator+(const string& str1, const string& str2);
         // friend string operator+(const string& cstr, const char* str2);
-        friend string operator+(string& str1, string& str2);
-        friend string operator+(string& str1, const char* cstr);
+        /*friend string operator+(string& str1, string& str2);
+        friend string operator+(string& str1, const char* cstr);*/
+        string operator+(const string& str2) const;
+        string operator+(const char* cstr) const;
+
         string& operator+=(const string& str2);
         string& operator+=(const char* cstr);
         
