@@ -59,6 +59,12 @@ namespace technikum{
         EXPECT_EQ(str1.length(str1.c_str()), 0);
         EXPECT_STREQ(str1.c_str(), "");
     }
+    
+    TEST(StringDefaultConstructorTest, DefaultConstructor) {
+        technikum::string str1;
+        EXPECT_EQ(str1.length(str1.c_str()), 0);
+        EXPECT_STREQ(str1.c_str(), "");
+    }
 
     TEST(StringCopyConstructorTest, CopyConstructor) {
         string original("Hello, World!");
@@ -104,6 +110,12 @@ namespace technikum{
         
     }
 
+    TEST(Stringconvert, convertionOfEmpty) {
+        technikum::string str1;
+        const char* converted = str1.convert();
+        EXPECT_EQ(converted[0], '\0');
+    }
+
     TEST(StringOverloadedPlusOperatorTest, OverloadedPlusOperator) {
         technikum::string str1("Hello, ");
         technikum::string str2("World!");
@@ -134,6 +146,21 @@ namespace technikum{
         str1 += cstr;
         EXPECT_EQ(str1.length(str1.c_str()), 13);
         EXPECT_STREQ(str1.c_str(), "Hello, World!");
+    }
+
+    TEST(StringNullptrTest, NullptrConstructor) {
+        const char* tozero = nullptr;
+        technikum::string str1(tozero);
+        EXPECT_EQ(str1.length(str1.c_str()), 0);
+        EXPECT_STREQ(str1.c_str(), "");
+    }
+
+    TEST(StringNullptrTest, NullptrAppend) {
+        const char* tozero = nullptr;
+        technikum::string str1("hello");
+        str1.append(tozero);
+        EXPECT_EQ(str1.length(str1.c_str()), 5);
+        EXPECT_STREQ(str1.c_str(), "hello");
     }
 
 }

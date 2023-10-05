@@ -4,15 +4,28 @@
 
 namespace technikum
 {
+
+  string::string(){
+    m_data = new char[1];
+    m_data[0] = '\0';
+  }
+
+
   string::string(char const* cstr)
   {
-    size_t m_length = length(cstr);  
-    this->m_data = new char[m_length + 1];  
-    for (size_t i = 0; i < m_length; i++)
-    {
-      this->m_data[i] = cstr[i];
+    if(cstr!=nullptr){
+        size_t m_length = length(cstr);  
+      this->m_data = new char[m_length + 1];  
+      for (size_t i = 0; i < m_length; i++)
+      {
+        this->m_data[i] = cstr[i];
+      }
+      this->m_data[m_length] = '\0';  
+    }else{
+      this->m_data = new char[1];
+      this->m_data[0] = '\0';
     }
-    this->m_data[m_length] = '\0';  
+    
   }
  
 
@@ -62,9 +75,11 @@ namespace technikum
   size_t string::length(char const* cstr) const
   {
     size_t length = 0;
-    while (cstr[length] != '\0')//kann endlos laufen falls fehler
-    {
-      length++;
+    if(cstr!=nullptr){
+      while (cstr[length] != '\0')//kann endlos laufen falls fehler
+      {
+        length++;
+      }
     }
     return length;
   }
@@ -83,6 +98,7 @@ namespace technikum
   void string::append(char const* cstr)
   {
   
+    
     size_t m_length = length(m_data);
     size_t c_length = length(cstr);
 
@@ -135,7 +151,9 @@ namespace technikum
 
   string operator+(string& str1, const char* str2)
   {
-    str1.append(str2);
+    if(str2!=nullptr){
+      str1.append(str2);
+    }
     return str1;
   }
 
@@ -151,7 +169,9 @@ namespace technikum
   }
 
   string& string::operator+=(const char* cstr) {
-    append(cstr);
+    if(cstr!=nullptr){
+      append(cstr);
+    }
     return *this;
   }
   
@@ -162,7 +182,7 @@ namespace technikum
 
   string::~string()
   { 
-    if(m_data !=  nullptr){
+    if(this->m_data != nullptr){
       delete[] this->m_data; 
     }
            
