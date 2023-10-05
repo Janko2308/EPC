@@ -6,6 +6,7 @@
 namespace technikum {
     class string {
     public:
+        string();
         string(const char* cstr);
         ~string();
         //Copy Constructor
