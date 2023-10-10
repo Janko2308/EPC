@@ -187,11 +187,20 @@ namespace technikum
     }
     return *this;
   }
-  
+
   const char* string::c_str()
   {
     return this->m_data;
   }
+
+  StringIterator<char> string::begin() {
+    return StringIterator<char>(this->m_data);
+  }
+
+  StringIterator<char> string::end() {
+    return StringIterator<char>(this->m_data + length(this->m_data));
+  }
+  
 
   string::~string()
   { 

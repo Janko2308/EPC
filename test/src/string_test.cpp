@@ -184,6 +184,127 @@ namespace technikum{
         EXPECT_STREQ(str1.c_str(), "Hello");
     }
 
+    TEST(StringIterator, IteratorTraversal) {
+        const char* testStr = "Hello, World!";
+        String str(testStr);
+
+        StringIterator<char> it = str.begin();
+        StringIterator<char> endIt = str.end();
+
+        // Traverse the string and build a new string from the characters
+        std::string result;
+        while (it != endIt) {
+            result += *it;
+            ++it;
+        }
+
+        // Check if the result matches the original string
+        EXPECT_EQ(result, testStr);
+    }
+
+    TEST(StringIterator, IteratorFind) {
+        const char* testStr = "Testing Iterator Functionality";
+        String str(testStr);
+
+        // Use your custom iterator with std::find
+        StringIterator<char> it = str.begin();
+        StringIterator<char> endIt = str.end();
+        StringIterator<char> foundIt = std::find(it, endIt, 'I');
+
+        // Check if the character 'I' was found
+        EXPECT_NE(foundIt, endIt);
+        EXPECT_EQ(*foundIt, 'I');
+    }
+
+    TEST(StringIterator, IteratorEmptyString) {
+        String str("");
+        StringIterator<char> it = str.begin();
+        StringIterator<char> endIt = str.end();
+        
+        // Ensure that begin() and end() are equal for an empty string
+        EXPECT_EQ(it, endIt);
+    }
+
+    TEST(StringIterator, IteratorIncrement) {
+        String str("ABC");
+        StringIterator<char> it = str.begin();
+        
+        // Iterate through the string and check the values
+        EXPECT_EQ(*it, 'A');
+        ++it;
+        EXPECT_EQ(*it, 'B');
+        ++it;
+        EXPECT_EQ(*it, 'C');
+        ++it;
+        
+        // Ensure that it is equal to end() after reaching the end
+        EXPECT_EQ(it, str.end());
+        ++it;
+        EXPECT_EQ(*it, '\0');
+        ++it;
+        EXPECT_EQ(*it, nullptr);
+    }
+
+    TEST(StringIterator, IteratorDecrement) {
+        String str("XYZ");
+        StringIterator<char> it = str.end();
+        
+        // Iterate backwards through the string and check the values
+        --it;
+        EXPECT_EQ(*it, 'Z');
+        --it;
+        EXPECT_EQ(*it, 'Y');
+        --it;
+        EXPECT_EQ(*it, 'X');
+        
+        // Ensure that it is equal to begin() after reaching the beginning
+        EXPECT_EQ(it, str.begin());
+    }
+
+    TEST(StringIterator, EqualsOperator) {
+        String str1("Hello");
+        String str2("Hello");
+        String str3("World");
+        bool result = (str1 == str2);
+        EXPECT_EQ(result, true);    
+
+        bool result2 = (str2 == str3);
+        EXPECT_EQ(result2, false);
+    }
+
+    TEST(StringIterator, EqualsNotOperator) {
+        String str1("Test");
+        String str2("String");
+        String str3("Test");
+        bool result = (str1 != str2);
+        EXPECT_EQ(result, true); 
+        bool result2 = (str1 != str3);
+        EXPECT_EQ(result2, false);
+    }
+
+    TEST(StringIterator, IteratorDereference) {
+        String str("Dereference");
+        StringIterator<char> it = str.begin();
+        
+        // Dereference the iterator to check character values
+        EXPECT_EQ(*it, 'D');
+        ++it;
+        EXPECT_EQ(*it, 'e');
+        ++it;
+        EXPECT_EQ(*it, 'r');
+    }
+
+    TEST(StringIterator, IteratorSTLFind) {
+        String str("FindTest");
+        
+        // Use std::find with custom iterator to find a character
+        StringIterator<char> it = std::find(str.begin(), str.end(), 'T');
+        
+        // Check if the character 'T' was found
+        EXPECT_NE(it, str.end());
+        EXPECT_EQ(*it, 'T');
+    }
+
 }
 
 /* int main(int argc, char **argv)
