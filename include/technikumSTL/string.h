@@ -2,7 +2,7 @@
 #define string_h
 
 #include <cstddef>
-#include "StringIterator.h"
+#include "iterator.h"
 
 namespace technikum {
     class string {
@@ -33,8 +33,8 @@ namespace technikum {
         string& operator+=(const string& str2);
         string& operator+=(const char* cstr);
 
-        StringIterator<char> begin();
-        StringIterator<char> end();
+        iterator<char> begin();
+        iterator<char> end();
 
         
         

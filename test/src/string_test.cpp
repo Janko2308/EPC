@@ -188,8 +188,8 @@ namespace technikum{
         const char* testStr = "Hello, World!";
         string str(testStr);
 
-        StringIterator<char> it = str.begin();
-        StringIterator<char> endIt = str.end();
+        iterator<char> it = str.begin();
+        iterator<char> endIt = str.end();
 
         // Traverse the string and build a new string from the characters
         std::string result;
@@ -207,9 +207,9 @@ namespace technikum{
         string str(testStr);
 
         // Use your custom iterator with std::find
-        StringIterator<char> it = str.begin();
-        StringIterator<char> endIt = str.end();
-        StringIterator<char> foundIt = std::find(it, endIt, 'I');
+        iterator<char> it = str.begin();
+        iterator<char> endIt = str.end();
+        iterator<char> foundIt = std::find(it, endIt, 'I');
 
         // Check if the character 'I' was found
         EXPECT_NE(foundIt, endIt);
@@ -218,8 +218,8 @@ namespace technikum{
 
     TEST(StringIterator, IteratorEmptyString) {
         string str("");
-        StringIterator<char> it = str.begin();
-        StringIterator<char> endIt = str.end();
+        iterator<char> it = str.begin();
+        iterator<char> endIt = str.end();
         
         // Ensure that begin() and end() are equal for an empty string
         EXPECT_EQ(it, endIt);
@@ -227,7 +227,7 @@ namespace technikum{
 
     TEST(StringIterator, IteratorIncrement) {
         string str("ABC");
-        StringIterator<char> it = str.begin();
+        iterator<char> it = str.begin();
         
         // Iterate through the string and check the values
         EXPECT_EQ(*it, 'A');
@@ -243,7 +243,7 @@ namespace technikum{
 
     TEST(StringIterator, IteratorDecrement) {
         string str("XYZ");
-        StringIterator<char> it = str.end();
+        iterator<char> it = str.end();
         
         // Iterate backwards through the string and check the values
         --it;
@@ -259,8 +259,8 @@ namespace technikum{
 
     TEST(StringIterator, EqualsOperator) {
         string str1("Hello");
-        StringIterator<char> it1 = str1.begin();
-        StringIterator<char> it2 = str1.begin();
+        iterator<char> it1 = str1.begin();
+        iterator<char> it2 = str1.begin();
         bool result = (it1 == it2);
         EXPECT_EQ(result, true);    
         ++it2;
@@ -270,8 +270,8 @@ namespace technikum{
 
     TEST(StringIterator, EqualsNotOperator) {
         string str1("Test");
-        StringIterator<char> it1 = str1.begin();
-        StringIterator<char> it2 = str1.begin();
+        iterator<char> it1 = str1.begin();
+        iterator<char> it2 = str1.begin();
         bool result = (it1 != it2);
         EXPECT_EQ(result, false); 
         ++it2;
@@ -281,7 +281,7 @@ namespace technikum{
 
     TEST(StringIterator, IteratorDereference) {
         string str("Dereference");
-        StringIterator<char> it = str.begin();
+        iterator<char> it = str.begin();
         
         // Dereference the iterator to check character values
         EXPECT_EQ(*it, 'D');
@@ -295,7 +295,7 @@ namespace technikum{
         string str("FindTest");
         
         // Use std::find with custom iterator to find a character
-        StringIterator<char> it = std::find(str.begin(), str.end(), 'T');
+        iterator<char> it = std::find(str.begin(), str.end(), 'T');
         
         // Check if the character 'T' was found
         EXPECT_NE(it, str.end());
