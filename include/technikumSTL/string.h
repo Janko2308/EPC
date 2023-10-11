@@ -2,7 +2,7 @@
 #define string_h
 
 #include <cstddef>
-#include "iterator.h"
+#include <iterator>
 
 namespace technikum {
     class string {
@@ -33,15 +33,31 @@ namespace technikum {
         string& operator+=(const string& str2);
         string& operator+=(const char* cstr);
 
-        iterator<char> begin();
-        iterator<char> end();
+        template<typename T>
+        class iterator;
 
-        
-        
+        template<typename T>
+        iterator<T> begin();
+
+        template<typename T>
+        iterator<T> end();
         
     private:
         char* m_data;
     };
+
+    template<typename T>
+        class iterator : public std::iterator<std::forward_iterator_tag, T> {
+        public:
+            iterator(T* ptr) : ptr_(ptr) {}
+            iterator operator++() { ptr_++; return *this; }
+            iterator operator--() { ptr_--; return *this; }
+            bool operator==(const iterator& other) const { return ptr_ == other.ptr_; }
+            bool operator!=(const iterator& other) const { return !(*this == other); }
+            T& operator*() { return *ptr_; }
+        private:
+            T* ptr_;
+        };
 
 }
 

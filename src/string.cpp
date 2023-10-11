@@ -192,15 +192,16 @@ namespace technikum
   {
     return this->m_data;
   }
-
-  iterator<char> string::begin() {
-    return iterator<char>(this->m_data);
-  }
-
-  iterator<char> string::end() {
-    return iterator<char>(this->m_data + length(this->m_data));
-  }
   
+  template <typename T>
+  typename string::iterator<T> string::begin() {
+    return iterator<T>(m_data);
+  }
+
+  template <typename T>
+  typename string::iterator<T> string::end() {
+    return iterator<T>(m_data + length(m_data));
+}
 
   string::~string()
   { 

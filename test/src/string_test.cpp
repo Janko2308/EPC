@@ -2,6 +2,7 @@
 #include <gtest/gtest.h>
 #include <iostream>
 
+
 namespace technikum{
 
     TEST(StringTests, InitializeFromString) {
@@ -188,8 +189,8 @@ namespace technikum{
         const char* testStr = "Hello, World!";
         string str(testStr);
 
-        iterator<char> it = str.begin();
-        iterator<char> endIt = str.end();
+        technikum::string::iterator<char> it = str.begin();
+        technikum::string::iterator<char> endIt = str.end();
 
         // Traverse the string and build a new string from the characters
         std::string result;
@@ -301,7 +302,7 @@ namespace technikum{
         EXPECT_NE(it, str.end());
         EXPECT_EQ(*it, 'T');
     }
-
+    
 }
 
 /* int main(int argc, char **argv)
