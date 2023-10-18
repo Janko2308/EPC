@@ -5,10 +5,6 @@
 namespace technikum
 {
 
-  string::string(){
-    m_data = new char[1];
-    m_data[0] = '\0';
-  }
 
 
   string::string(char const* cstr)
@@ -22,8 +18,7 @@ namespace technikum
       }
       this->m_data[m_length] = '\0';  
     }else{
-      this->m_data = new char[1];
-      this->m_data[0] = '\0';
+      this->m_data = nullptr;
     }
     
   }
