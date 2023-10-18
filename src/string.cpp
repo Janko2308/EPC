@@ -187,14 +187,6 @@ namespace technikum
   {
     return this->m_data;
   }
-
-  iterator<char> string::begin() {
-    return iterator<char>(this->m_data);
-  }
-
-  iterator<char> string::end() {
-    return iterator<char>(this->m_data + length(this->m_data));
-  }
   
 
   string::~string()
