@@ -7,14 +7,14 @@ namespace technikum{
 
     TEST(StringTests, InitializeFromString) {
         const char* cstr = "Hello, World!";
-        technikum::string myString(cstr);
+        string myString(cstr);
         EXPECT_EQ(myString.length(cstr), 13);
         EXPECT_STREQ(myString.c_str(), cstr);
     }
 
     TEST(StringTests, AppendString) {
-        technikum::string str1("Hello, ");
-        technikum::string str2("World!");
+        string str1("Hello, ");
+        string str2("World!");
         str1.append("World!");
         size_t test = str1.length(str1.c_str());
         const char* test2 = str1.c_str();
@@ -23,7 +23,7 @@ namespace technikum{
     }
 
     TEST(StringTests, AppendConstChar) {
-        technikum::string str1("Hello, ");
+        string str1("Hello, ");
         const char* cstr = "World!";
         str1.append(cstr);
         EXPECT_EQ(str1.length(str1.c_str()), 13);
@@ -31,13 +31,13 @@ namespace technikum{
     }
 
     TEST(StringTests, EmptyCharInitializer) {
-        technikum::string str1("");
+        string str1("");
         EXPECT_EQ(str1.length(str1.c_str()), 0);
         EXPECT_STREQ(str1.c_str(), "");
     }
 
     TEST(StringTests, AppendEmptyChar) {
-        technikum::string str1("Hello, ");
+        string str1("Hello, ");
         const char* cstr = "";
         str1.append(cstr);
         EXPECT_EQ(str1.length(str1.c_str()), 7);
@@ -45,7 +45,7 @@ namespace technikum{
     }
 
     TEST(StringTests, AppendToEmptyChar) {
-        technikum::string str1("");
+        string str1("");
         const char* cstr = "Empty";
         str1.append(cstr);
         EXPECT_EQ(str1.length(str1.c_str()), 5);
@@ -54,7 +54,7 @@ namespace technikum{
 
 
     TEST(StringTests, AppendEmptyCharToEmptyChar) {
-        technikum::string str1("");
+        string str1("");
         const char* cstr = "";
         str1.append(cstr);
         EXPECT_EQ(str1.length(str1.c_str()), 0);
@@ -78,15 +78,15 @@ namespace technikum{
         EXPECT_STREQ(str1.c_str(), str2.c_str());
     }
     TEST(StringMoveConstructorTest, MoveConstructor) {
-        technikum::string str1("hello");
-        technikum::string str2 = std::move(str1);
+        string str1("hello");
+        string str2 = std::move(str1);
         //EXPECT_EQ(str1.length(str1.c_str()), 0);
         EXPECT_STREQ(str2.c_str(), "hello");
     }
 
     TEST(StringMoveAssignmentOperatorTest, MoveAssignmentOperator) {
-        technikum::string str1("hello");
-        technikum::string str2 = ("World");
+        string str1("hello");
+        string str2 = ("World");
         str2 = std::move(str1);
         //EXPECT_EQ(str1.length(str1.c_str()), 0);
         EXPECT_STREQ(str2.c_str(), "hello");
@@ -94,7 +94,7 @@ namespace technikum{
 
 
     TEST(Stringconvert, convertionOfString) {
-        technikum::string str1("hello");
+        string str1("hello");
         const char* converted = str1.convert();
         EXPECT_EQ(converted[0], 'h');
         EXPECT_EQ(converted[1], 'e');
@@ -106,9 +106,9 @@ namespace technikum{
     }
 
     TEST(StringOverloadedPlusOperatorTest, OverloadedPlusOperator) {
-        technikum::string str1("Hello, ");
-        technikum::string str2("World!");
-        technikum::string str3 = str1 + str2;
+        string str1("Hello, ");
+        string str2("World!");
+        string str3 = str1 + str2;
         EXPECT_EQ(str3.length(str3.c_str()), 13);
         EXPECT_STREQ(str3.c_str(), "Hello, World!");
         EXPECT_STREQ(str1.c_str(), "Hello, ");
@@ -116,9 +116,9 @@ namespace technikum{
     }
 
     TEST(StringOverloadedPlusOperatorTest, OverloadedPlusOperatorWithConstChar) {
-        technikum::string str1("Hello, ");
+        string str1("Hello, ");
         const char* cstr = "World!";
-        technikum::string str3 = str1 + cstr;
+        string str3 = str1 + cstr;
         EXPECT_EQ(str3.length(str3.c_str()), 13);
         EXPECT_STREQ(str3.c_str(), "Hello, World!");
         EXPECT_STREQ(str1.c_str(), "Hello, ");
@@ -126,15 +126,15 @@ namespace technikum{
     }
 
     TEST(StringOverloadedPlusEqualsOperatorTest, OverloadedPlusEqualsOperator) {
-        technikum::string str1("Hello, ");
-        technikum::string str2("World!");
+        string str1("Hello, ");
+        string str2("World!");
         str1 += str2;
         EXPECT_EQ(str1.length(str1.c_str()), 13);
         EXPECT_STREQ(str1.c_str(), "Hello, World!");
     }
 
     TEST(StringOverloadedPlusEqualsOperatorTest, OverloadedPlusEqualsOperatorWithConstChar) {
-        technikum::string str1("Hello, ");
+        string str1("Hello, ");
         const char* cstr = "World!";
         str1 += cstr;
         EXPECT_EQ(str1.length(str1.c_str()), 13);
@@ -143,13 +143,13 @@ namespace technikum{
 
     TEST(StringNullptrTest, NullptrConstructor) {
         const char* tozero = nullptr;
-        technikum::string str1(tozero);
+        string str1(tozero);
         EXPECT_EQ(str1.length(str1.c_str()), 0);
     }
 
     TEST(StringNullptrTest, NullptrAppend) {
         const char* tozero = nullptr;
-        technikum::string str1("hello");
+        string str1("hello");
         str1.append(tozero);
         EXPECT_EQ(str1.length(str1.c_str()), 5);
         EXPECT_STREQ(str1.c_str(), "hello");
@@ -157,8 +157,8 @@ namespace technikum{
 
     TEST(StringNullptrTest, NullptrOperatorPlus) {
         const char* tozero = nullptr;
-        technikum::string str1("Hello");
-        technikum::string str3 = str1 + tozero;
+        string str1("Hello");
+        string str3 = str1 + tozero;
         EXPECT_EQ(str3.length(str3.c_str()), 5);
         EXPECT_STREQ(str3.c_str(), "Hello");
         EXPECT_STREQ(str1.c_str(), "Hello");
@@ -166,7 +166,7 @@ namespace technikum{
 
     TEST(StringNullptrTest, NullptrOperatorPlusEqual) {
         const char* tozero = nullptr;
-        technikum::string str1("Hello");
+        string str1("Hello");
         str1 += tozero;
         EXPECT_EQ(str1.length(str1.c_str()), 5);
         EXPECT_STREQ(str1.c_str(), "Hello");
@@ -291,11 +291,11 @@ namespace technikum{
     }
 
     TEST(UniquePtrTest, StringBasicFunctionality) {
-        UniquePtr<technikum::string> strPointer(new technikum::string("Hello World"));
+        UniquePtr<string> strPointer(new string("Hello World"));
         EXPECT_TRUE(strPointer);
         EXPECT_STREQ(strPointer->c_str(), "Hello World");
 
-        UniquePtr<technikum::string> movedStrPointer(std::move(strPointer));
+        UniquePtr<string> movedStrPointer(std::move(strPointer));
         EXPECT_FALSE(strPointer);
         EXPECT_STREQ(movedStrPointer->c_str(), "Hello World");
         
@@ -304,22 +304,22 @@ namespace technikum{
     }
 
     TEST(UniquePtrTest, StringReleaseAndReset) {
-        UniquePtr<technikum::string> strPointer(new technikum::string("Test"));
-        technikum::string* rawString = strPointer.Release();
+        UniquePtr<string> strPointer(new string("Test"));
+        string* rawString = strPointer.Release();
         EXPECT_FALSE(strPointer);
         EXPECT_STREQ(rawString->c_str(), "Test");
 
         delete rawString;
 
-        strPointer.Reset(new technikum::string("ResetTest"));
+        strPointer.Reset(new string("ResetTest"));
         EXPECT_STREQ(strPointer->c_str(), "ResetTest");
         strPointer.Reset();
         // ... Additional assertions if needed
     }
 
     TEST(UniquePtrTest, StringSwapFunctionality) {
-        UniquePtr<technikum::string> str1(new technikum::string("First"));
-        UniquePtr<technikum::string> str2(new technikum::string("Second"));
+        UniquePtr<string> str1(new string("First"));
+        UniquePtr<string> str2(new string("Second"));
 
         str1.Swap(str2);
 
