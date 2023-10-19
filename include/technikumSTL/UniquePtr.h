@@ -21,6 +21,7 @@ public:
             Reset();
             m_ptr = other.m_ptr;
             other.m_ptr = nullptr;
+            m_deleter = std::move(other.m_deleter);
         }
         return *this;
     }
