@@ -1,7 +1,6 @@
 #ifndef UNIQUE_PTR_H
 #define UNIQUE_PTR_H
 
-#include <utility>  // Für std::swap
 #include <memory>   // Für std::default_delete
 
 
@@ -20,8 +19,8 @@ public:
     UniquePtr& operator=(UniquePtr&& other) noexcept {
         if (this != &other) {
             Reset();
-            std::swap(m_ptr, other.m_ptr);
-            m_deleter = std::move(other.m_deleter);
+            m_ptr = other.m_ptr;
+            other.m_ptr = nullptr;
         }
         return *this;
     }
@@ -67,21 +66,22 @@ public:
         m_ptr = ptr;
     }
 
-    // Swap
     void Swap(UniquePtr& other) noexcept {
-        std::swap(m_ptr, other.m_ptr);
-        std::swap(m_deleter, other.m_deleter);
+        T* temp = m_ptr;
+        m_ptr = other.m_ptr;
+        other.m_ptr = temp;
+    }
+
+    // Swap
+    void Swap(T* other) noexcept {
+        T temp = *m_ptr;
+        *m_ptr = *other;
+        *other = temp;
     }
 
 private:
     T* m_ptr;
     Deleter m_deleter;
 };
-
-// Nicht-Mitglieds Swap-Funktion
-template<typename T, typename Deleter>
-void swap(UniquePtr<T, Deleter>& a, UniquePtr<T, Deleter>& b) noexcept {
-    a.Swap(b);
-}
 
 #endif  // UNIQUE_PTR_H

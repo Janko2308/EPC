@@ -320,13 +320,23 @@ namespace technikum{
     }
 
     TEST(UniquePtrTest, StringSwapFunctionality) {
-        UniquePtr<string> str1(new string("First"));
-        UniquePtr<string> str2(new string("Second"));
+        UniquePtr<string> pt1(new string("First"));
+        string* pt2 = new string("Second");
 
-        str1.Swap(str2);
+        pt1.Swap(pt2);
 
-        EXPECT_STREQ(str1->c_str(), "Second");
-        EXPECT_STREQ(str2->c_str(), "First");
+        EXPECT_STREQ(pt1->c_str(), "Second");
+        EXPECT_STREQ(pt2->c_str(), "First");
+    }
+
+    TEST(UniquePtrTest, UniquePtrSwapFunctionality) {
+        UniquePtr<string> pt1(new string("First"));
+        UniquePtr<string> pt2(new string("Second"));
+
+        pt1.Swap(pt2);
+
+        EXPECT_STREQ(pt1->c_str(), "Second");
+        EXPECT_STREQ(pt2->c_str(), "First");
     }
 
     TEST(UniquePtrTest, Entity) {
