@@ -314,7 +314,7 @@ namespace technikum{
         strPointer.Reset(new string("ResetTest"));
         EXPECT_STREQ(strPointer->c_str(), "ResetTest");
         strPointer.Reset();
-        // ... Additional assertions if needed
+        
     }
 
     TEST(UniquePtrTest, StringSwapFunctionality) {
@@ -325,6 +325,27 @@ namespace technikum{
 
         EXPECT_STREQ(str1->c_str(), "Second");
         EXPECT_STREQ(str2->c_str(), "First");
+    }
+
+    TEST(UniquePtrTest, Entity) {
+       struct Entity {
+            int id = -1;
+        };
+
+        UniquePtr<Entity> entityPointer(new Entity);
+        UniquePtr<string> stringPointer(new string("Hello World"));
+        EXPECT_EQ(entityPointer->id, -1);
+    }
+
+    TEST(UniquePtrTest, MoveOperator) {
+        UniquePtr<string> strPointer(new string("Test"));
+        UniquePtr<string> strPointer2 = std::move(strPointer);
+        EXPECT_FALSE(strPointer);
+        EXPECT_STREQ(strPointer2->c_str(), "Test");
+        UniquePtr<string> strPointer3(new string("Moved"));
+        strPointer3 = std::move(strPointer2);
+        EXPECT_FALSE(strPointer2);
+        EXPECT_STREQ(strPointer3->c_str(), "Test");
     }
 
 }
