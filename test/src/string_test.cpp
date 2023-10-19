@@ -4,6 +4,8 @@
 #include <iostream>
 
 namespace technikum{
+    bool default_deleted = false;
+    bool custom_deleted = false;
 
     TEST(StringTests, InitializeFromString) {
         const char* cstr = "Hello, World!";
@@ -346,6 +348,36 @@ namespace technikum{
         strPointer3 = std::move(strPointer2);
         EXPECT_FALSE(strPointer2);
         EXPECT_STREQ(strPointer3->c_str(), "Test");
+    }
+    TEST(UniquePtrTest, DefaultDeleter) {
+        struct TestStruct {
+            ~TestStruct() { default_deleted = true; }
+        };
+
+        {
+            UniquePtr<TestStruct> ptr(new TestStruct);
+            EXPECT_FALSE(default_deleted);
+        }
+        EXPECT_TRUE(default_deleted);
+    }
+
+    TEST(UniquePtrTest, CustomDeleter) {
+        struct TestStruct {
+            // Keine spezifischen Datenmitglieder hier
+        };
+
+        struct CustomDeleter {
+            void operator()(TestStruct* ts) const {
+                custom_deleted = true;
+                delete ts;
+            }
+        };
+
+        {
+            UniquePtr<TestStruct, CustomDeleter> ptr(new TestStruct);
+            EXPECT_FALSE(custom_deleted);
+        }
+        EXPECT_TRUE(custom_deleted);
     }
 
 }
