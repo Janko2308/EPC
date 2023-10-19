@@ -1,6 +1,3 @@
-#include <iostream>
-#include <functional>
-
 template<typename T>
 class UniquePtr {
 public:
@@ -57,15 +54,11 @@ public:
         std::swap(ptr, other.ptr);
     }
 
-    // custom deleters
-    template<typename Deleter>
-    void setDeleter(Deleter d) {
-        deleter = d;
-    }
+    using DeleterType = void (*)(T*);
 
 private:
     T* ptr;
-    std::function<void(T*)> deleter = [](T* p) { delete p; };
+    DeleterType deleter = [](T* p) { delete p; };
 };
 
 // swap function

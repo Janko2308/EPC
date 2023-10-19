@@ -3,6 +3,7 @@
 
 #include <cstddef>
 #include "iterator.h"
+#include "unique_ptr.h"
 
 namespace technikum {
     class string {
