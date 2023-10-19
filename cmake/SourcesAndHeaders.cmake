@@ -9,6 +9,7 @@ set(exe_sources
 
 set(headers
     include/technikumSTL/string.h
+    include/technikumSTL/UniquePtr.h
 )
 
 set(test_sources

@@ -1,4 +1,5 @@
 #include "technikumSTL/string.h"
+#include "technikumSTL/UniquePtr.h"
 #include <gtest/gtest.h>
 #include <iostream>
 
@@ -287,6 +288,43 @@ namespace technikum{
         // Check if the character 'T' was found
         EXPECT_NE(it, str.end());
         EXPECT_EQ(*it, 'T');
+    }
+
+    TEST(UniquePtrTest, StringBasicFunctionality) {
+        UniquePtr<technikum::string> strPointer(new technikum::string("Hello World"));
+        EXPECT_TRUE(strPointer);
+        EXPECT_STREQ(strPointer->c_str(), "Hello World");
+
+        UniquePtr<technikum::string> movedStrPointer(std::move(strPointer));
+        EXPECT_FALSE(strPointer);
+        EXPECT_STREQ(movedStrPointer->c_str(), "Hello World");
+        
+        *movedStrPointer += "!";
+        EXPECT_STREQ(movedStrPointer->c_str(), "Hello World!");
+    }
+
+    TEST(UniquePtrTest, StringReleaseAndReset) {
+        UniquePtr<technikum::string> strPointer(new technikum::string("Test"));
+        technikum::string* rawString = strPointer.Release();
+        EXPECT_FALSE(strPointer);
+        EXPECT_STREQ(rawString->c_str(), "Test");
+
+        delete rawString;
+
+        strPointer.Reset(new technikum::string("ResetTest"));
+        EXPECT_STREQ(strPointer->c_str(), "ResetTest");
+        strPointer.Reset();
+        // ... Additional assertions if needed
+    }
+
+    TEST(UniquePtrTest, StringSwapFunctionality) {
+        UniquePtr<technikum::string> str1(new technikum::string("First"));
+        UniquePtr<technikum::string> str2(new technikum::string("Second"));
+
+        str1.Swap(str2);
+
+        EXPECT_STREQ(str1->c_str(), "Second");
+        EXPECT_STREQ(str2->c_str(), "First");
     }
 
 }
